@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projectclock - Conteúdos Gratuitos</title>
+<meta name="description" content="Acesse todos os conteúdos gratuitos da Projectclock sobre tecnologia, manutenção e montagem de PCs e notebooks.">
+<link rel="icon" href="imgs/icon-projectclock.ico" type="image/x-icon">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="nav-logo"><a href="index.html"><strong>Projectclock</strong></a></div>
+  <button class="nav-toggle"><span></span><span></span><span></span></button>
+
+  <nav class="nav-links">
+    <ul>
+      <li><a href="index.html" class="spa-link">Início</a></li>
+      <li><a href="sobre.html" class="spa-link">Sobre</a></li>
+      <li><a href="projetos.html" class="spa-link">Projetos</a></li>
+      <li><a href="aprendizagem.html" class="spa-link">Aprendizagem</a></li>
+      <li><a href="gratuitos.html" class="spa-link active">Gratuitos</a></li>
+    </ul>
+  </nav>
+
+  <div class="nav-actions">
+    <a href="projectnews/projectnews/indexPN.html" class="nav-btn-news">
+      Projectnews <span class="icon">»</span>
+    </a>
+    <button onclick="alternarTema()">🌙</button>
+  </div>
+</header>
+
+<main id="spa-content" class="main">
+
+  <!-- Hero -->
+  <section class="hero scroll-animate">
+    <h1>Conteúdos Gratuitos</h1>
+    <p>Aqui você encontra vídeos, apostilas e tutoriais gratuitos para aprender manutenção, montagem e tecnologia com o Projectclock.</p>
+  </section>
+
+  <!-- Vídeos -->
+  <section class="scroll-animate">
+    <h2>Vídeos Educativos</h2>
+    <p>Confira nossos vídeos introdutórios e aulas práticas disponíveis gratuitamente no YouTube:</p>
+
+    <div class="video-grid">
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" title="Aula 1 - Introdução à Manutenção de PCs" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" title="Aula 2 - Montagem Passo a Passo" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" title="Aula 3 - Dicas e Cuidados" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <!-- Apostilas e Tutoriais -->
+  <section class="scroll-animate scroll-animate-left">
+    <h2>Cursos gratuitos</h2>
+    <p>Acesse gratuitamente o nosso conteúdo produzido por profissionais da área e com suporte 24hrs !</p>
+    
+
+    <div class="info-cards">
+      <a class="card" href="aprendizagem/index.html">
+        <h3>Guia de Manutenção de Pcs</h3>
+        <p>Aprenda os conceitos fundamentais para montar, desmontar e resolver problemas em computadores.</p>
+        <p style="color:red;">Em breve </p>
+      </a>
+
+      <div class="card" >
+        <h2>Como funciona cada componente de um PC</h3>
+        <p>Aprenda a como os componentes do computador se comunicam e o que cada uma faz.</p>
+        <p style="color:red;">Em breve </p>
+      </div>
+
+      <div class="card">
+        <h2>Programação básica</h3>
+        <p>Aprenda conceitos fundamentais de programação e desenvolva o seu primeiro aplicativo funcional!</p>
+        <p style="color:red;">Em breve </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galeria de Fotos -->
+  <section class="scroll-animate scroll-animate-right">
+    <h2>Galeria de Aprendizagem</h2>
+    <p>Veja alguns registros de aulas, montagens e atividades realizadas:</p>
+
+    <div class="photo-grid">
+      <img src="imgs/em_breve.png" alt="Montagem de PC">
+      <img src="imgs/em_breve.png" alt="Manutenção de notebook">
+      <img src="imgs/em_breve.png" alt="Limpeza de hardware">
+      <img src="imgs/em_breve.png" alt="Aula prática de eletrônica">
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="scroll-animate scroll-animate-left">
+    <h2>Quer Aprender Ainda Mais?</h2>
+    <p>Participe da nossa comunidade e receba novidades e conteúdos exclusivos:</p>
+    <div class="social-buttons">
+        <a href="https://instagram.com/projectclock" target="_blank" class="btn-hero">Instagram</a>
+        <a href="https://youtube.com/projectclock" target="_blank" class="btn-hero">YouTube</a>
+        <a href="https://twitter.com/projectclock" target="_blank" class="btn-hero">Twitter</a>
+      </div>
+  </section>
+
+</main>
+
+
+<footer class="footer scroll-animate">
+  &copy; 2025 Projectclock. Todos os direitos reservados.
+</footer>
+
+</body>
+</html>
