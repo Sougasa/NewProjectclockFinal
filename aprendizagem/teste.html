@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Curso: Montagem e Desmontagem de PC</title>
+  <meta name="description" content="Aulas passo a passo sobre montagem e desmontagem de PC. Layout com sidebar, progresso, video e marcação de aulas concluídas.">
+  <link rel="icon" href="aprendizagem_logo.png" type="image/png">
+  <style>
+    /* ====== Reset simples ====== */
+    :root{
+      --bg:#f8f9fb; --panel:#fff; --muted:#6b7280; --accent:#2533ff; --success:#10b981; --danger:#ef4444; --shadow: 0 6px 18px rgba(15,23,42,.08);
+      --radius:14px; --gap:18px; --maxwidth:1200px;
+      --text:#0f172a;
+    }
+    [data-theme="dark"]{
+      --bg:#0b1020; --panel:#071028; --muted:#9aa3b2; --accent:#3b82f6; --text:#e6eef8; --shadow: 0 6px 18px rgba(2,6,23,.6);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,var(--bg),#e9eefb); color:var(--text); -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* Top progress bar */
+    .topbar{position:sticky;top:0;z-index:40;background:transparent;padding:14px 18px;display:flex;align-items:center;justify-content:center}
+    .topbar .container{width:100%;max-width:var(--maxwidth);display:flex;align-items:center;gap:14px}
+    .progress-wrap{flex:1}
+    .progress{height:10px;background:rgba(0,0,0,.06);border-radius:999px;overflow:hidden;box-shadow:var(--shadow)}
+    .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#6d28d9);width:0%;transition:width .4s ease}
+    .steps{font-size:13px;color:var(--muted);margin-left:12px;white-space:nowrap}
+
+    /* Layout */
+    .main{display:flex;gap:20px;max-width:var(--maxwidth);margin:20px auto;padding:0 18px}
+    .sidebar{width:320px;background:var(--panel);border-radius:12px;padding:14px;box-shadow:var(--shadow);height:calc(100vh - 120px);overflow:auto;position:relative}
+    .mobile-toggle{display:none}
+    .brand{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+    .brand h1{font-size:16px;margin:0}
+    .module{margin-top:8px}
+    .module-title{display:flex;align-items:center;gap:10px;font-weight:600;color:var(--text);padding:8px 6px;border-radius:8px}
+    .lessons{margin-top:8px;padding:6px;border-radius:8px;background:linear-gradient(180deg, rgba(0,0,0,0.02), transparent)}
+    .lesson{display:flex;align-items:center;gap:10px;padding:10px;border-radius:8px;cursor:pointer}
+    .lesson:hover{background:rgba(0,0,0,0.03)}
+    .lesson .dot{width:18px;height:18px;border-radius:50%;display:inline-grid;place-items:center;border:2px solid var(--accent);color:var(--accent);font-size:11px}
+    .lesson.completed .dot{background:var(--success);border-color:transparent;color:white}
+    .lesson.current{background:rgba(37,51,255,0.06)}
+    .lesson .title{font-size:14px;color:var(--text)}
+    .lesson .meta{font-size:12px;color:var(--muted)}
+
+    /* Content */
+    .content{flex:1}
+    .card{background:var(--panel);padding:22px;border-radius:12px;box-shadow:var(--shadow)}
+    .title{font-size:20px;margin:0 0 10px}
+    .desc{color:var(--muted);margin-bottom:14px}
+    .video-wrap{position:relative;padding-top:56.25%;background:#111;border-radius:8px;overflow:hidden}
+    .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+    /* Interactive areas */
+    .below-row{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:18px}
+    .panel{background:var(--panel);padding:14px;border-radius:10px;box-shadow:var(--shadow)}
+
+    /* Q&A */
+    .qa-list{max-height:280px;overflow:auto;padding:6px;display:flex;flex-direction:column;gap:8px}
+    .qa-item{border-radius:8px;padding:10px;background:linear-gradient(180deg, rgba(0,0,0,0.02), transparent)}
+    .qa-meta{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted);margin-bottom:6px}
+    .qa-body{font-size:14px;margin-bottom:8px}
+    .reply{margin-left:12px;padding-left:12px;border-left:2px solid rgba(0,0,0,0.04)}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* Rating */
+    .stars{display:flex;gap:6px;align-items:center}
+    .star{font-size:26px;cursor:pointer;user-select:none}
+    .star.filled{color:var(--accent)}
+    .rating-summary{display:flex;align-items:center;gap:8px}
+    .feedback-area{display:none;margin-top:10px}
+    .feedback-area.visible{display:block}
+
+    /* Controls */
+    .controls{display:flex;align-items:center;justify-content:space-between;margin-top:20px;gap:12px}
+    .controls .left{display:flex;gap:10px;align-items:center}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;background:var(--accent);color:white;border:0;cursor:pointer;font-weight:600;box-shadow:var(--shadow)}
+    .btn.ghost{background:transparent;color:var(--accent);border:2px solid rgba(37,51,255,.12)}
+    .mark{background:var(--success)}
+    .link{color:var(--muted);font-size:14px;text-decoration:underline;cursor:pointer}
+
+    /* responsive */
+    @media (max-width:980px){
+      .main{flex-direction:column;padding-bottom:40px}
+      .sidebar{width:100%;height:auto;order:2}
+      .content{order:1}
+      .below-row{grid-template-columns:1fr}
+      .mobile-toggle{display:block;background:var(--panel);border-radius:10px;padding:10px;cursor:pointer;margin-bottom:8px}
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar" role="banner">
+    <div class="container">
+      <div class="progress-wrap" aria-hidden="false">
+        <div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+      </div>
+      <div class="steps" id="stepsText">0 / 0 aulas</div>
+    </div>
+  </div>
+
+  <main class="main" id="app">
+    <aside class="sidebar" id="sidebar" aria-label="Menu de aulas">
+      <div class="brand">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden>
+          <rect width="24" height="24" rx="6" fill="var(--accent)"></rect>
+          <path d="M6 12h12" stroke="#fff" stroke-width="1.6" stroke-linecap="round"></path>
+          <path d="M6 8h12" stroke="#fff" stroke-width="1.6" stroke-linecap="round"></path>
+        </svg>
+        <div>
+          <h1>Curso: Montagem & Desmontagem</h1>
+          <div style="font-size:12px;color:var(--muted)">40 aulas • Nível: Iniciante</div>
+        </div>
+      </div>
+
+      <div class="mobile-toggle" id="mobileToggle" tabindex="0" role="button" aria-pressed="false">Abrir/Fechar menu</div>
+
+      <div id="moduleList"></div>
+    </aside>
+
+    <section class="content">
+      <div class="card">
+        <h2 class="title" id="lessonTitle">Bem-vindo ao curso</h2>
+        <p class="desc" id="lessonDesc">Selecione uma aula na lateral para começar. Aqui você verá o vídeo e os passos.</p>
+
+        <div class="video-wrap" id="videoWrap">
+          <!-- iframe será inserido via JS -->
+          <iframe id="videoFrame" src="" allowfullscreen title="Video da aula"></iframe>
+        </div>
+
+        <!-- abaixo do vídeo: Q&A e avaliações -->
+        <div class="below-row">
+          <div class="panel" id="qaPanel">
+            <h3 style="margin:0 0 8px">❓ Tire suas dúvidas</h3>
+            <p class="small">Envie uma pergunta sobre esta aula. Todas as perguntas e respostas aparecem para os outros alunos.</p>
+
+            <div style="margin-top:10px;display:flex;gap:8px">
+              <input id="qInput" type="text" placeholder="Digite sua dúvida (ex: como conectar o cooler?)" style="flex:1;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06)">
+              <button class="btn" id="qSend">Enviar</button>
+            </div>
+
+            <div class="qa-list" id="qaList" aria-live="polite" style="margin-top:12px"></div>
+
+            <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
+              <button class="btn ghost" id="simulateAnswer">(Prototipo) Marcar resposta como respondida</button>
+              <div class="small">Você poderá conectar isso ao backend depois.</div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div class="panel" id="ratingPanel">
+              <h3 style="margin:0 0 8px">⭐ Avalie esta aula</h3>
+              <div class="rating-summary">
+                <div id="avgRating" class="small">⭐ 0.0 / 5</div>
+                <div id="totalRatings" class="small" style="color:var(--muted)">0 avaliações</div>
+              </div>
+
+              <div style="margin-top:12px">
+                <div class="stars" id="stars">
+                  <span class="star" data-value="1">☆</span>
+                  <span class="star" data-value="2">☆</span>
+                  <span class="star" data-value="3">☆</span>
+                  <span class="star" data-value="4">☆</span>
+                  <span class="star" data-value="5">☆</span>
+                </div>
+
+                <div class="feedback-area" id="feedbackArea">
+                  <textarea id="feedbackText" rows="4" placeholder="Conte o que achou desta aula..." style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);margin-top:8px"></textarea>
+                  <div style="display:flex;justify-content:flex-end;margin-top:8px">
+                    <button class="btn" id="sendFeedback">Enviar feedback</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel small" id="feedbackListPanel">
+              <strong>Feedbacks recentes</strong>
+              <div id="feedbackList" style="margin-top:8px;max-height:150px;overflow:auto"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="left">
+            <button class="btn ghost" id="prevBtn" aria-label="Aula anterior">◀ Aula Anterior</button>
+            <button class="btn ghost" id="nextBtn" aria-label="Próxima aula">Próxima Aula ▶</button>
+          </div>
+
+          <div style="display:flex;gap:10px;align-items:center">
+            <button class="btn" id="markBtn">Marcar como concluído ✓</button>
+            <button class="btn ghost" id="themeBtn">Modo Escuro</button>
+          </div>
+        </div>
+
+        <div class="footer-mini">
+          <div class="link" id="backToModule">Voltar para Módulo</div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // ====== Dados das aulas (troque src por links dos seus vídeos) ======
+    const data = [
+      {module: 'Módulo 1 — Fundamentos', lessons: [
+        {title:'Apresentação e objetivos', src:'https://www.youtube.com/embed/4OiMOHRDs14', desc:'Introdução ao curso e o que você vai aprender.'},
+        {title:'Ferramentas e segurança', src:'https://www.youtube.com/embed/dQw4w9WgXcQ', desc:'Equipamentos, cuidados antiestáticos e ferramentas essenciais.'},
+        {title:'Componentes do PC (placa-mãe, CPU, RAM)', src:'', desc:'Visão geral dos componentes.'}
+      ]},
+      {module: 'Módulo 2 — Montagem', lessons: [
+        {title:'Preparando o gabinete', src:'', desc:'Fluxo de montagem: organização e preparação.'},
+        {title:'Instalando a placa-mãe', src:'', desc:'Posicionamento, standoffs e parafusos.'},
+        {title:'Instalando o processador e cooler', src:'', desc:'Como aplicar pasta térmica e fixar o cooler.'}
+      ]}
+    ];
+
+    // estado
+    const state = {moduleIndex:0, lessonIndex:0};
+
+    // localStorage keys
+    const STORAGE_KEY = 'curso_pc_progress_v1';
+    const QA_KEY_PREFIX = 'curso_pc_qa_'; // + lessonId
+    const RATINGS_KEY_PREFIX = 'curso_pc_ratings_'; // + lessonId
+
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+
+    // elementos
+    const moduleListEl = document.getElementById('moduleList');
+    const lessonTitle = document.getElementById('lessonTitle');
+    const lessonDesc = document.getElementById('lessonDesc');
+    const videoFrame = document.getElementById('videoFrame');
+    const progressBar = document.getElementById('progressBar');
+    const stepsText = document.getElementById('stepsText');
+    const markBtn = document.getElementById('markBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const themeBtn = document.getElementById('themeBtn');
+    const backToModule = document.getElementById('backToModule');
+    const qInput = document.getElementById('qInput');
+    const qSend = document.getElementById('qSend');
+    const qaList = document.getElementById('qaList');
+    const simulateAnswer = document.getElementById('simulateAnswer');
+    const starsWrap = document.getElementById('stars');
+    const avgRatingEl = document.getElementById('avgRating');
+    const totalRatingsEl = document.getElementById('totalRatings');
+    const feedbackArea = document.getElementById('feedbackArea');
+    const feedbackText = document.getElementById('feedbackText');
+    const sendFeedback = document.getElementById('sendFeedback');
+    const feedbackList = document.getElementById('feedbackList');
+
+    // helper: id atual da aula
+    function lessonId(mi, li){ return `m${mi}l${li}`; }
+
+    // criar estrutura do sidebar
+    function renderSidebar(){
+      moduleListEl.innerHTML='';
+      data.forEach((mod, mi)=>{
+        const modWrap = document.createElement('div');
+        modWrap.className='module';
+        const title = document.createElement('div');
+        title.className='module-title';
+        title.innerHTML = `<strong>${mod.module}</strong>`;
+        modWrap.appendChild(title);
+
+        const lessonsWrap = document.createElement('div');
+        lessonsWrap.className='lessons';
+
+        mod.lessons.forEach((ls, li)=>{
+          const id = lessonId(mi,li);
+          const lesson = document.createElement('div');
+          lesson.className='lesson';
+          lesson.setAttribute('role','button');
+          lesson.setAttribute('tabindex','0');
+          if(saved[id] && saved[id].completed) lesson.classList.add('completed');
+          if(mi===state.moduleIndex && li===state.lessonIndex) lesson.classList.add('current');
+
+          lesson.innerHTML = `<span class="dot">${li+1}</span><div style="flex:1"><div class="title">${ls.title}</div><div class="meta">${ls.desc || ''}</div></div>`;
+
+          lesson.addEventListener('click', ()=>{ selectLesson(mi,li); });
+          lesson.addEventListener('keypress', (e)=>{ if(e.key==='Enter' || e.key===' ') selectLesson(mi,li); });
+
+          lessonsWrap.appendChild(lesson);
+        });
+
+        modWrap.appendChild(lessonsWrap);
+        moduleListEl.appendChild(modWrap);
+      });
+
+      updateProgressUI();
+    }
+
+    function selectLesson(mi, li){
+      state.moduleIndex = mi; state.lessonIndex = li;
+      renderSidebar();
+      loadLesson();
+      if(window.innerWidth < 980){ window.scrollTo({top:0,behavior:'smooth'}); }
+    }
+
+    function loadLesson(){
+      const lesson = data[state.moduleIndex].lessons[state.lessonIndex];
+      lessonTitle.textContent = lesson.title;
+      lessonDesc.textContent = lesson.desc || '';
+      if(lesson.src){ videoFrame.src = lesson.src; videoFrame.setAttribute('title', lesson.title); }
+      else{ videoFrame.src = ''; videoFrame.setAttribute('title', 'Aula sem vídeo (substitua o src)'); }
+
+      // atualizar botão marcar
+      const id = lessonId(state.moduleIndex, state.lessonIndex);
+      const completed = saved[id] && saved[id].completed;
+      markBtn.textContent = completed ? 'Desmarcar como concluído' : 'Marcar como concluído ✓';
+      markBtn.classList.toggle('mark', !completed);
+
+      // atualizar prev/next
+      prevBtn.disabled = (state.moduleIndex===0 && state.lessonIndex===0);
+      nextBtn.disabled = (state.moduleIndex===data.length-1 && state.lessonIndex===data[data.length-1].lessons.length-1);
+
+      // carregar QA e ratings da aula
+      renderQA();
+      renderRatings();
+      renderFeedbacks();
+    }
+
+    // ===== Q&A (local simulation) =====
+    function getQAStore(){
+      const key = QA_KEY_PREFIX + lessonId(state.moduleIndex,state.lessonIndex);
+      return JSON.parse(localStorage.getItem(key) || '[]');
+    }
+    function setQAStore(arr){
+      const key = QA_KEY_PREFIX + lessonId(state.moduleIndex,state.lessonIndex);
+      localStorage.setItem(key, JSON.stringify(arr));
+    }
+
+    function renderQA(){
+      const arr = getQAStore();
+      qaList.innerHTML = '';
+      if(arr.length===0) qaList.innerHTML = '<div class="small" style="padding:8px">Nenhuma dúvida ainda. Seja o primeiro a perguntar!</div>';
+      arr.forEach((q, idx)=>{
+        const el = document.createElement('div'); el.className='qa-item';
+        el.innerHTML = `<div class="qa-meta"><div><strong>Pergunta</strong></div><div class="small">${new Date(q.ts).toLocaleString()}</div></div><div class="qa-body">${escapeHtml(q.text)}</div>`;
+        if(q.answer){ const r = document.createElement('div'); r.className='reply'; r.innerHTML = `<div class="qa-meta"><div class="small">Resposta</div><div class="small">${new Date(q.answeredAt).toLocaleString()}</div></div><div class="qa-body">${escapeHtml(q.answer)}</div>`; el.appendChild(r); }
+
+        // botão de marcar como respondido (apenas no protótipo)
+        const ctrl = document.createElement('div'); ctrl.style.display='flex'; ctrl.style.gap='8px'; ctrl.style.justifyContent='flex-end'; ctrl.style.marginTop='8px';
+        const btn = document.createElement('button'); btn.className='btn ghost'; btn.textContent = q.answer ? 'Editar resposta' : 'Responder (protótipo)';
+        btn.addEventListener('click', ()=>{
+          const ans = prompt('Digite a resposta (protótipo):', q.answer||'');
+          if(ans!==null){ arr[idx].answer = ans; arr[idx].answeredAt = Date.now(); setQAStore(arr); renderQA(); }
+        });
+        ctrl.appendChild(btn);
+        el.appendChild(ctrl);
+
+        qaList.appendChild(el);
+      });
+    }
+
+    qSend.addEventListener('click', ()=>{ sendQuestion(); });
+    qInput.addEventListener('keypress', (e)=>{ if(e.key==='Enter') sendQuestion(); });
+
+    function sendQuestion(){
+      const text = qInput.value && qInput.value.trim();
+      if(!text) return alert('Escreva sua dúvida antes de enviar.');
+      const arr = getQAStore();
+      arr.unshift({text, ts: Date.now(), answer: null});
+      setQAStore(arr);
+      qInput.value = '';
+      renderQA();
+
+      // FUTURO: enviar para backend
+      // fetch('/api/questions', {method:'POST', body: JSON.stringify({lesson: lessonId(...), text})})
+    }
+
+    simulateAnswer.addEventListener('click', ()=>{ // responder a primeira que esteja sem resposta
+      const arr = getQAStore();
+      const idx = arr.findIndex(x=>!x.answer);
+      if(idx===-1){ alert('Não há perguntas sem resposta (protótipo).'); return; }
+      const ans = prompt('Digite a resposta (protótipo):');
+      if(ans===null) return;
+      arr[idx].answer = ans; arr[idx].answeredAt = Date.now(); setQAStore(arr); renderQA();
+    });
+
+    // ===== Ratings & Feedback (local simulation) =====
+    function getRatingsStore(){
+      const key = RATINGS_KEY_PREFIX + lessonId(state.moduleIndex,state.lessonIndex);
+      return JSON.parse(localStorage.getItem(key) || '[]');
+    }
+    function setRatingsStore(arr){ const key = RATINGS_KEY_PREFIX + lessonId(state.moduleIndex,state.lessonIndex); localStorage.setItem(key, JSON.stringify(arr)); }
+
+    function renderRatings(){
+      const arr = getRatingsStore();
+      const total = arr.length;
+      const avg = total ? (arr.reduce((s,r)=>s+r.score,0)/total) : 0;
+      avgRatingEl.textContent = `⭐ ${avg.toFixed(1)} / 5`;
+      totalRatingsEl.textContent = `${total} avaliação${total!==1?'es':''}`;
+
+      // marcar estrelas de acordo com usuário local (simulação: última avaliação local)
+      const last = arr.find(a=>a.local) || arr[arr.length-1];
+      highlightStars(last ? last.score : 0);
+    }
+
+    function highlightStars(n){
+      [...starsWrap.children].forEach(s=>{ const v = Number(s.dataset.value); s.textContent = v<=n ? '★' : '☆'; s.classList.toggle('filled', v<=n); });
+    }
+
+    // clique nas estrelas
+    [...starsWrap.children].forEach(s=>{
+      s.addEventListener('click', ()=>{
+        const val = Number(s.dataset.value);
+        // mostrar area de feedback
+        feedbackArea.classList.add('visible');
+        highlightStars(val);
+        feedbackArea.dataset.pendingScore = val;
+      });
+    });
+
+    sendFeedback.addEventListener('click', ()=>{
+      const score = Number(feedbackArea.dataset.pendingScore || 0);
+      if(!score){ alert('Escolha a quantidade de estrelas antes.'); return; }
+      const text = feedbackText.value.trim();
+      const arr = getRatingsStore();
+      arr.push({score, text, ts: Date.now(), local: true});
+      setRatingsStore(arr);
+      feedbackText.value = '';
+      feedbackArea.classList.remove('visible');
+      renderRatings();
+      renderFeedbacks();
+
+      // FUTURO: enviar para backend
+      // fetch('/api/ratings', {method:'POST', body: JSON.stringify({lesson: lessonId(...), score, text})})
+    });
+
+    function renderFeedbacks(){
+      const arr = getRatingsStore().slice().reverse();
+      feedbackList.innerHTML = '';
+      if(arr.length===0) feedbackList.innerHTML = '<div class="small">Seja o primeiro a deixar um feedback.</div>';
+      arr.slice(0,6).forEach(f=>{
+        const div = document.createElement('div'); div.style.padding='8px 0';
+        div.innerHTML = `<div style="font-weight:600">${'★'.repeat(f.score)}${'☆'.repeat(5-f.score)}</div><div class="small">${f.text ? escapeHtml(f.text) : '<i>Sem comentário</i>'}</div><div class="small" style="color:var(--muted)">${new Date(f.ts).toLocaleString()}</div>`;
+        feedbackList.appendChild(div);
+      });
+    }
+
+    // ===== Progress & course functions =====
+    function updateProgressUI(){
+      const total = data.reduce((s,m)=>s+m.lessons.length,0);
+      let done = 0;
+      data.forEach((m,mi)=>m.lessons.forEach((l,li)=>{ if(saved[`m${mi}l${li}`] && saved[`m${mi}l${li}`].completed) done++; }));
+      const pct = Math.round((done/total)*100);
+      progressBar.style.width = pct + '%';
+      stepsText.textContent = `${done} / ${total} aulas`;
+    }
+
+    markBtn.addEventListener('click', ()=>{
+      const id = lessonId(state.moduleIndex, state.lessonIndex);
+      saved[id] = saved[id] || {};
+      saved[id].completed = !saved[id].completed;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+      renderSidebar();
+      loadLesson();
+    });
+
+    prevBtn.addEventListener('click', ()=>{
+      if(state.lessonIndex>0) selectLesson(state.moduleIndex, state.lessonIndex-1);
+      else if(state.moduleIndex>0){ const pm = state.moduleIndex-1; selectLesson(pm, data[pm].lessons.length-1); }
+    });
+    nextBtn.addEventListener('click', ()=>{
+      const curMod = data[state.moduleIndex];
+      if(state.lessonIndex < curMod.lessons.length-1) selectLesson(state.moduleIndex, state.lessonIndex+1);
+      else if(state.moduleIndex < data.length-1) selectLesson(state.moduleIndex+1, 0);
+    });
+
+    // theme toggle
+    themeBtn.addEventListener('click', ()=>{
+      const root = document.documentElement;
+      const isDark = root.getAttribute('data-theme') === 'dark';
+      if(isDark){ root.removeAttribute('data-theme'); themeBtn.textContent = 'Modo Escuro'; }
+      else{ root.setAttribute('data-theme','dark'); themeBtn.textContent = 'Modo Claro'; }
+    });
+
+    // back to module - volta para inicio do modulo
+    backToModule.addEventListener('click', ()=>{ selectLesson(state.moduleIndex, 0); });
+
+    // mobile toggle
+    document.getElementById('mobileToggle').addEventListener('click', ()=>{ document.getElementById('sidebar').classList.toggle('open'); });
+
+    // inicialização
+    (function init(){
+      if(saved.last){ state.moduleIndex = saved.last.mi || 0; state.lessonIndex = saved.last.li || 0; }
+      renderSidebar();
+      loadLesson();
+      const originalSelect = selectLesson;
+      selectLesson = function(mi,li){ originalSelect(mi,li); saved.last = {mi,li}; localStorage.setItem(STORAGE_KEY, JSON.stringify(saved)); };
+      setInterval(updateProgressUI,1500);
+    })();
+
+    // simples escaper
+    function escapeHtml(str){ return String(str).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;'); }
+  </script>
+</body>
+</html>

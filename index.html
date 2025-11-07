@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projectclock - Início</title>
+<meta name="description" content="Projectclock é um espaço para aprendizado sobre tecnologia, com conteúdos, tutoriais e novidades em um só lugar.">
+<meta name="keywords" content="tecnologia, projectclock, hardware, software, tutoriais, novidades, inovação">
+<meta name="author" content="Projectclock">
+
+<link rel="icon" href="imgs/icon-projectclock.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="nav-logo"><a href="index.html"><strong>Projectclock</strong></a></div>
+  <button class="nav-toggle"><span></span><span></span><span></span></button>
+
+  <nav class="nav-links">
+    <ul>
+      <li><a href="index.html" class="spa-link active">Início</a></li>
+      <li><a href="sobre.html" class="spa-link">Sobre</a></li>
+      <li><a href="projetos.html" class="spa-link">Projetos</a></li>
+      <li><a href="aprendizagem.html" class="spa-link">Aprendizagem</a></li>
+    </ul>
+  </nav>
+
+  <div class="nav-actions">
+    <a href="projectnews/projectnews/indexPN.html" class="nav-btn-news">
+      Projectnews <span class="icon">»</span>
+    </a>
+    <button onclick="alternarTema()">🌙</button>
+  </div>
+</header>
+
+
+<!-- Conteúdo principal SPA -->
+<main id="spa-content" class="main">
+
+  <!-- Hero -->
+  <section id="hero" class="hero scroll-animate">
+    <h1>Bem-vindo ao Projectclock!</h1>
+    <p>Exploração e aprendizado sobre tecnologia em um só lugar.</p>
+    <a href="sobre.html" class="btn-hero spa-link">Saiba mais</a>
+  </section>
+
+  <!-- Sobre -->
+  <section id="sobre" class="scroll-animate scroll-animate-left">
+    <h2>O que é o Projectclock?</h2>
+    <p>O Projectclock é um espaço dedicado ao aprendizado sobre tecnologia, com foco em hardware, software e tendências.</p>
+  </section>
+
+  <!-- Projetos -->
+  <section id="projetos" class="scroll-animate scroll-animate-right">
+    <h2>Projetos em Destaque</h2>
+    <ul>
+      <li>Descarte apropriado de lixo eletrônico</li>
+      <li>Plataforma de aprendizagem online</li>
+      <li>Serviço de <em>reaproveitamento de peças</em></li>
+    </ul>
+    <a href="projetos.html" class="btn-hero spa-link">Ver Projetos</a>
+  </section>
+
+  <!-- Novidades / Aprendizagem -->
+  <section id="novidades" class="scroll-animate scroll-animate-left">
+    <h2>Novidades</h2>
+    <ul>
+      <li>Feedback de usuários sobre novos recursos</li>
+      <li>Movimentações das redes sociais</li>
+      <li>Lançamento do novo aplicativo</li>
+    </ul>
+    <a href="aprendizagem.html" class="btn-hero spa-link">Aprenda mais</a>
+  </section>
+
+  <!-- Contato -->
+  <section id="contato" class="scroll-animate scroll-animate-right">
+    <h2>Contato Rápido</h2>
+    <form>
+      <input type="text" placeholder="Seu nome" style="padding:8px; margin-bottom:8px; width:100%; border-radius:6px;">
+      <input type="email" placeholder="Seu email" style="padding:8px; margin-bottom:8px; width:100%; border-radius:6px;">
+      <textarea placeholder="Sua mensagem" style="padding:8px; margin-bottom:8px; width:100%; border-radius:6px;"></textarea>
+      <button type="submit" class="btn-hero">Enviar</button>
+    </form>
+  </section>
+
+</main>
+
+<footer class="footer scroll-animate">&copy; 2025 Projectclock. Todos os direitos reservados.</footer>
+
+
+
+</body>
+</html>

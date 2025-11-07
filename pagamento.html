@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pagamento - Projectclock</title>
+<meta name="description" content="Página de pagamentos e contribuições para apoiar o Projectclock e ter acesso a conteúdos exclusivos.">
+<link rel="icon" href="imgs/icon-projectclock.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="nav-logo"><a href="index.html"><strong>Projectclock</strong></a></div>
+  <button class="nav-toggle"><span></span><span></span><span></span></button>
+  <nav class="nav-links">
+    <ul>
+      <li><a href="index.html" class="spa-link">Início</a></li>
+      <li><a href="sobre.html" class="spa-link">Sobre</a></li>
+      <li><a href="projetos.html" class="spa-link">Projetos</a></li>
+      <li><a href="aprendizagem.html" class="spa-link">Aprendizagem</a></li>
+      <li><a href="contribuir.html" class="spa-link">Contribuir</a></li>
+    </ul>
+  </nav>
+  <div class="nav-actions">
+    <button onclick="alternarTema()">🌙</button>
+  </div>
+</header>
+
+<main class="main" id="spa-content">
+
+  <!-- Hero -->
+  <section class="hero scroll-animate">
+    <h1>Faça sua Contribuição</h1>
+    <p>Escolha o tipo de contribuição e apoie o Projectclock para ter acesso a conteúdos extras e reconhecimento em nossas cerimônias.</p>
+  </section>
+
+  <!-- Formulário de pagamento/contribuição -->
+  <section class="scroll-animate info-cards">
+    <div class="card">
+      <h2>Contribuição</h2>
+      <form id="contrib-form" action="#" method="POST">
+        <label for="nome">Nome:</label><br>
+        <input type="text" id="nome" name="nome" placeholder="Seu nome" required
+               style="width:100%; padding:10px; margin-bottom:10px; border-radius:6px; border:1px solid #ccc;"><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" placeholder="seu@email.com" required
+               style="width:100%; padding:10px; margin-bottom:10px; border-radius:6px; border:1px solid #ccc;"><br>
+
+        
+
+        <label for="valor">Valor (R$) - mínimo R$5:</label><br>
+        <input type="number" id="valor" name="valor" placeholder="Ex: 50" min="5" required
+               style="width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:1px solid #ccc;"><br>
+
+        <button type="submit" class="btn-hero" style="width:100%;">Contribuir Agora</button>
+      </form>
+      <p style="margin-top:12px; font-size:14px; color:var(--muted);">
+        O pagamento será processado em uma plataforma segura. Você receberá confirmação por e-mail.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer scroll-animate">&copy; 2025 Projectclock. Todos os direitos reservados.</footer>
+
+<script>
+document.getElementById('contrib-form').addEventListener('submit', async function(e){
+  e.preventDefault();
+
+  const nome = document.getElementById('nome').value;
+  const email = document.getElementById('email').value;
+  const valor = parseFloat(document.getElementById('valor').value);
+
+  if(valor < 5){
+    alert('O valor mínimo de contribuição é R$5.');
+    return;
+  }
+
+  try {
+    const response = await fetch('/contribuir', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nome, email, valor })
+    });
+    const data = await response.json();
+    if(data.error){
+      alert(data.error);
+    } else {
+      alert('E-mail enviado! Confira seu QR Code para pagamento.');
+      this.reset();
+    }
+  } catch(err){
+    alert('Erro ao enviar contribuição.');
+    console.error(err);
+  }
+});
+</script>
+
+
+
+</body>
+</html>

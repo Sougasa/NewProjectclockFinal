@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Curso: Montagem e Manutenção de PC</title>
+  <meta name="description" content="Aulas passo a passo sobre montagem e manutenção de PC. Layout com sidebar, progresso, video e marcação de aulas concluídas.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="aprendizagem_logo.png" type="image/x-icon"> 
+</head>
+<body>
+  <div class="topbar" role="banner">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;">
+    <a href="../aprendizagem.html" class="btn back-btn">← Voltar para o Projectclock</a>
+        <div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+      </div>
+      <div class="steps" id="stepsText">0 / 0 aulas</div>
+    </div>
+  </div>
+
+  <main class="main" id="app">
+    <aside class="sidebar" id="sidebar" aria-label="Menu de aulas">
+      <div class="brand">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden>
+          <rect width="24" height="24" rx="6" fill="var(--accent)"></rect>
+          <path d="M6 12h12" stroke="#fff" stroke-width="1.6" stroke-linecap="round"></path>
+          <path d="M6 8h12" stroke="#fff" stroke-width="1.6" stroke-linecap="round"></path>
+        </svg>
+        <div>
+          <h1>Curso gratuito: Montagem & Manutenção de PC - <u>Projectclock</u></h1>
+          <div style="font-size:12px;color:var(--muted)">40 aulas</div>
+        </div>
+      </div>
+
+      <div class="mobile-toggle" id="mobileToggle" tabindex="0" role="button" aria-pressed="false">Abrir/Fechar menu</div>
+
+      <div id="moduleList"></div>
+    </aside>
+
+    <section class="content">
+      <div class="card">
+        <h2 class="title" id="lessonTitle">Bem-vindo ao curso</h2>
+        <p class="desc" id="lessonDesc">Selecione uma aula na lateral para começar. Aqui você verá o vídeo e os passos.</p>
+
+        <div class="video-wrap" id="videoWrap">
+          <iframe id="videoFrame" src="" allowfullscreen title="Video da aula"></iframe>
+        </div>
+
+        <!-- Botões para abrir Q&A e Avaliação -->
+        <div style="display:flex;gap:12px;margin-top:18px;margin-bottom:12px">
+          <button class="btn" id="toggleQA">❓ Tirar dúvidas</button>
+          <button class="btn" id="toggleRating">⭐ Avaliar aula</button>
+        </div>
+
+        <!-- abaixo do vídeo: Q&A e avaliações -->
+        <div class="below-row">
+          <div class="panel hidden" id="qaPanel">
+            <h3 style="margin:0 0 8px">❓ Tire suas dúvidas</h3>
+            <p class="small">Envie uma pergunta sobre esta aula. Todas as perguntas e respostas aparecem para os outros alunos.</p>
+
+            <div style="margin-top:10px;display:flex;gap:8px">
+              <input id="qInput" type="text" placeholder="Digite sua dúvida!" style="flex:1;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06)">
+              <button class="btn" id="qSend">Enviar</button>
+            </div>
+
+            <div class="qa-list" id="qaList" aria-live="polite" style="margin-top:12px"></div>
+
+            <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
+              <button class="btn ghost" id="simulateAnswer">(Prototipo) Marcar resposta como respondida</button>
+              <div class="small">Você poderá conectar isso ao backend depois.</div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div class="panel hidden" id="ratingPanel">
+              <h3 style="margin:0 0 8px">⭐ Avalie esta aula</h3>
+              <div class="rating-summary">
+                <div id="avgRating" class="small">⭐ 0.0 / 5</div>
+                <div id="totalRatings" class="small" style="color:var(--muted)">0 avaliações</div>
+              </div>
+
+              <div style="margin-top:12px">
+                <div class="stars" id="stars">
+                  <span class="star" data-value="1">☆</span>
+                  <span class="star" data-value="2">☆</span>
+                  <span class="star" data-value="3">☆</span>
+                  <span class="star" data-value="4">☆</span>
+                  <span class="star" data-value="5">☆</span>
+                </div>
+
+                <div class="feedback-area" id="feedbackArea">
+                  <textarea id="feedbackText" rows="4" placeholder="Conte o que achou desta aula..." style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);margin-top:8px"></textarea>
+                  <div style="display:flex;justify-content:flex-end;margin-top:8px">
+                    <button class="btn" id="sendFeedback">Enviar feedback</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel small" id="feedbackListPanel">
+              <strong>Feedbacks recentes</strong>
+              <div id="feedbackList" style="margin-top:8px;max-height:150px;overflow:auto"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="left">
+            <button class="btn ghost" id="prevBtn" aria-label="Aula anterior">◀ Aula Anterior</button>
+            <button class="btn ghost" id="nextBtn" aria-label="Próxima aula">Próxima Aula ▶</button>
+          </div>
+
+          <div style="display:flex;gap:10px;align-items:center">
+            <button class="btn" id="markBtn">Marcar como concluído ✓</button>
+            <button class="btn ghost" id="themeBtn">Modo Escuro</button>
+          </div>
+        </div>
+
+        <div class="footer-mini">
+          <div class="link" id="backToModule"><br>Voltar para o início do Módulo</div>
+        </div>
+
+
+      </div>
+    </section>
+  </main>
+
+  <div id="payModal" class="pay-modal" style="display:none">
+    <div class="pay-modal-content">
+      <button class="pay-modal-close" id="closePayModal" aria-label="Fechar">×</button>
+      <h3>Conteúdo exclusivo</h3>
+      <p>Esta aula é exclusiva para alunos pagos.</p>
+      <a href="../pagamento.html" class="btn" style="margin-top:12px" target="_blank">Clique aqui para liberar</a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

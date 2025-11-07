@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projectclock - Projetos</title>
+<meta name="description" content="Confira nossos projetos, vídeos e fotos da equipe coletando materiais e fazendo manutenção em PCs.">
+<link rel="icon" href="imgs/icon-projectclock.ico" type="image/x-icon">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="nav-logo"><a href="index.html"><strong>Projectclock</strong></a></div>
+  <button class="nav-toggle"><span></span><span></span><span></span></button>
+
+  <nav class="nav-links">
+    <ul>
+      <li><a href="index.html" class="spa-link active">Início</a></li>
+      <li><a href="sobre.html" class="spa-link">Sobre</a></li>
+      <li><a href="projetos.html" class="spa-link">Projetos</a></li>
+      <li><a href="aprendizagem.html" class="spa-link">Aprendizagem</a></li>
+    </ul>
+  </nav>
+
+  <div class="nav-actions">
+    <a href="projectnews/projectnews/indexPN.html" class="nav-btn-news">
+      Projectnews <span class="icon">»</span>
+    </a>
+    <button onclick="alternarTema()">🌙</button>
+  </div>
+</header>
+
+<main id="spa-content" class="main">
+
+  <!-- Hero -->
+  <section class="hero scroll-animate">
+    <h1>Nossos Projetos</h1>
+    <p>Veja vídeos e fotos da equipe coletando materiais, fazendo manutenção em PCs e promovendo tecnologia.</p>
+  </section>
+
+  <!-- Galeria de Vídeos -->
+  <section class="scroll-animate scroll-animate-left videos-section">
+    <h2>Vídeos Recentes</h2>
+    <video controls preload="metadata" class="video-player">
+  <source src="imgs/vitória.mp4" type="video/mp4">
+  Seu navegador não suporta vídeos HTML5.
+</video>
+
+  </section>
+
+  <!-- Fotos de Projetos -->
+  <section class="scroll-animate scroll-animate-right photos-section">
+    <h2>Fotos dos Projetos</h2>
+    <div class="photo-grid">
+      <img src="imgs/pc1.jpg" alt="Coletando materiais" />
+      <img src="imgs/pc6.png" alt="Reaproveitamento de peças" />
+      
+      <img src="imgs/pc3.jpg" alt="Equipe trabalhando" />
+      <img src="imgs/pc4.jpg" alt="Reaproveitamento de peças" />
+      <img src="imgs/pc5.jpg" alt="Reaproveitamento de peças" />
+      <img src="imgs/pc2.jpg" alt="Manutenção em PCs" />
+      <img src="imgs/pc7.png" alt="Reaproveitamento de peças" />
+      <img src="imgs/pc8.png" alt="Reaproveitamento de peças" />
+    </div>
+  </section>
+
+  <!-- Redes Sociais -->
+  <section class="scroll-animate scroll-animate-left social-section">
+    <h2>Siga-nos nas Redes</h2>
+    <p>Acompanhe nossos projetos, dicas e novidades nas redes sociais:</p>
+    <div class="social-buttons">
+      <a href="https://instagram.com/projectclock" target="_blank" class="btn-hero">Instagram</a>
+      <a href="https://youtube.com/projectclock" target="_blank" class="btn-hero">YouTube</a>
+      <a href="https://twitter.com/projectclock" target="_blank" class="btn-hero">Twitter</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer scroll-animate">&copy; 2025 Projectclock. Todos os direitos reservados.</footer>
+
+</body>
+</html>

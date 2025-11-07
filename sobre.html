@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projectclock - Sobre</title>
+<meta name="description" content="Saiba mais sobre o Projectclock, nossa missão, visão e equipe.">
+<link rel="icon" href="imgs/icon-projectclock.ico" type="image/x-icon">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="nav-logo"><a href="index.html"><strong>Projectclock</strong></a></div>
+  <button class="nav-toggle"><span></span><span></span><span></span></button>
+
+  <nav class="nav-links">
+    <ul>
+      <li><a href="index.html" class="spa-link active">Início</a></li>
+      <li><a href="sobre.html" class="spa-link">Sobre</a></li>
+      <li><a href="projetos.html" class="spa-link">Projetos</a></li>
+      <li><a href="aprendizagem.html" class="spa-link">Aprendizagem</a></li>
+    </ul>
+  </nav>
+
+  <div class="nav-actions">
+    <a href="projectnews/projectnews/indexPN.html" class="nav-btn-news">
+      Projectnews <span class="icon">»</span>
+    </a>
+    <button onclick="alternarTema()">🌙</button>
+  </div>
+</header>
+
+<main id="spa-content" class="main">
+
+  <!-- Hero -->
+  <section class="hero scroll-animate">
+    <h1>Sobre o Projectclock</h1>
+    <p>Conheça nossa missão, visão e a equipe por trás do aprendizado em tecnologia.</p>
+    <img src="imgs/teamate.png" alt="Equipe Projectclock" class="hero-img" style="max-width:150px; width:100%; height:auto;">
+  </section>
+
+  <!-- Missão e Visão -->
+  <section class="scroll-animate scroll-animate-left info-cards">
+    <div class="card">
+      <h2>Missão</h2>
+      <p>Facilitar o aprendizado tecnológico de forma prática, acessível e divertida, conectando pessoas com conhecimento de ponta.</p>
+    </div>
+    <div class="card">
+      <h2>Visão</h2>
+      <p>Criar uma comunidade ativa de aprendizado, onde cada usuário evolua junto com os projetos e conteúdos oferecidos.</p>
+    </div>
+  </section>
+
+  <!-- Equipe -->
+  <section class="scroll-animate scroll-animate-right">
+    <h2>Nossa Equipe</h2>
+    <div class="team-cards">
+      <div class="team-card">
+        <img src="imgs/souga.png" alt="Eduardo Menzel" />
+        <h3>Eduardo Menzel</h3>
+        <p>Fundador e Desenvolvedor</p>
+      </div>
+      <div class="team-card">
+        <img src="imgs/theo.png" alt="Theo Campos" />
+        <h3>Theo Campos</h3>
+        <p>Designer e UX/UI</p>
+      </div>
+      <div class="team-card">
+        <img src="imgs/caio.png" alt="Caio Ceschini" />
+        <h3>Caio Ceschini</h3>
+        <p>Conteúdo e Tutoriais</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer scroll-animate">&copy; 2025 Projectclock. Todos os direitos reservados.</footer>
+
+</body>
+</html>
