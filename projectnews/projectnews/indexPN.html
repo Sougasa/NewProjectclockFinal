@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProjectNews - Notícias de Tecnologia</title>
+<meta name="description" content="Fique por dentro das últimas notícias de tecnologia em um universo interativo e imersivo.">
+<link rel="icon" href="projectnews.png" type="image/image/png">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="projectnews.css">
+<script src="projectnews.js" defer></script>
+</head>
+<body>
+
+<header class="navbar">
+  <a href="../../index.html" class="btn-back">Voltar para o Projectclock</a>
+</header>
+
+<canvas id="spaceCanvas"></canvas>
+<canvas id="nebulaCanvas"></canvas>
+
+<main class="main">
+  <!-- Hero -->
+  <section class="hero scroll-animate">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>ProjectNews</h1>
+        <p>Explore as últimas notícias de tecnologia em um universo interativo.</p>
+        <a href="#noticias" class="btn-space">Explorar Notícias</a>
+      </div>
+      <div class="hero-logo">
+        <img src="projectnews.png" alt="ProjectNews Logo">
+        <canvas class="logo-particles"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- Notícias principais -->
+  <section id="noticias" class="scroll-animate news-section">
+    <h2>Destaques</h2>
+    <div class="highlight-news">
+      <article class="highlight-card">
+        <img src="imgs/gpu.png" alt="Notícia Principal">
+        <div class="highlight-text">
+          <h3>Lançamento de GPU revolucionária</h3>
+          <p>Uma nova GPU promete performance de outro planeta! Descubra os detalhes desta inovação tecnológica.</p>
+          <a href="#" class="btn-space-small">Leia mais</a>
+        </div>
+      </article>
+    </div>
+
+    <!-- Grid de notícias -->
+    <div class="news-container">
+      <aside class="sidebar">
+        <h3>Categorias</h3>
+        <ul>
+          <li><a href="#">Hardware</a></li>
+          <li><a href="#">Software</a></li>
+          <li><a href="#">IA & Robótica</a></li>
+          <li><a href="#">Espaço</a></li>
+          <li><a href="#">Startups</a></li>
+        </ul>
+      </aside>
+
+      <div class="news-grid">
+        <article class="news-card">
+          <img src="imgs/programa.png" alt="Notícia 1">
+          <h3>Computação quântica avança rapidamente</h3>
+          <p>Pesquisadores anunciam progressos significativos no processamento quântico de dados.</p>
+          <a href="#" class="btn-space-small">Leia mais</a>
+        </article>
+        <article class="news-card">
+          <img src="imgs/gpu.png" alt="Notícia 2">
+          <h3>Inteligência artificial em órbita</h3>
+          <p>Startups exploram IA para satélites, abrindo um novo capítulo na exploração espacial.</p>
+          <a href="#" class="btn-space-small">Leia mais</a>
+        </article>
+        <article class="news-card">
+          <img src="imgs/programa.png" alt="Notícia 3">
+          <h3>Nova linguagem de programação surge</h3>
+          <p>Uma linguagem moderna promete simplificar o desenvolvimento de aplicações complexas.</p>
+          <a href="#" class="btn-space-small">Leia mais</a>
+        </article>
+        <article class="news-card">
+          <img src="imgs/gpu.png" alt="Notícia 4">
+          <h3>Startups espaciais crescem 300%</h3>
+          <p>O setor de exploração espacial privada ganha força com investimentos milionários.</p>
+          <a href="#" class="btn-space-small">Leia mais</a>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer scroll-animate">
+  <p>&copy; 2025 Projectclock. Todos os direitos reservados.</p>
+  <div class="social-buttons">
+    <a href="#" class="btn-hero">Twitter</a>
+    <a href="#" class="btn-hero">Discord</a>
+    <a href="#" class="btn-hero">GitHub</a>
+  </div>
+</footer>
+
+</body>
+</html>
